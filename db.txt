@@ -1,10 +1,2 @@
-Krzysztof 20
-Janusz 40
-Krzysztof 20
-Janusz 40
-Krzysztof 20
-Janusz 40
-maciek\ 75
-Krzysztof 20
-Janusz 40
-maciek 88
+karol  18
+karol rogowski 12

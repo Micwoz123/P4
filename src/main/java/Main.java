@@ -16,7 +16,7 @@ class Main {
       Scanner scanner = new Scanner(System.in);
       
       while (true) {
-        System.out.println("Wybierz sposób dodania studenta:");
+        
         System.out.println("1. Z konsoli");
         System.out.println("2. Wypisz wszystkich studentów");
         
@@ -24,14 +24,14 @@ class Main {
         scanner.nextLine(); 
         switch (choice) {
           case 1:
-            s.addStudent(new Student("Krzysztof", 20));
-            s.addStudent(new Student("Janusz", 40));
             System.out.println("Podaj imię studenta:");
             String name = scanner.nextLine();
+            System.out.println("Podaj nazwisko studenta:");
+            String nazwisko = scanner.nextLine();
             System.out.println("Podaj wiek studenta:");
             int age = scanner.nextInt();
             scanner.nextLine(); 
-            s.addStudent(new Student(name, age));
+            s.addStudent(new Student(name,nazwisko,age));
             break;
             case 2:
             var students = s.getStudents();
