@@ -18,6 +18,7 @@ class Main {
       while (true) {
         System.out.println("Wybierz sposób dodania studenta:");
         System.out.println("1. Z konsoli");
+        System.out.println("2. Wypisz wszystkich studentów");
         
         int choice = scanner.nextInt();
         scanner.nextLine(); 
@@ -31,6 +32,12 @@ class Main {
             int age = scanner.nextInt();
             scanner.nextLine(); 
             s.addStudent(new Student(name, age));
+            break;
+            case 2:
+            var students = s.getStudents();
+            for (Student current : students) {
+              System.out.println(current.ToString());
+            }
             break;
           default:
             System.out.println("Niepoprawny wybór.");
