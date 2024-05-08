@@ -19,6 +19,7 @@ class Main {
         
         System.out.println("1. Z konsoli");
         System.out.println("2. Wypisz wszystkich studentów");
+        System.out.println("3. Wyjdz");
         
         int choice = scanner.nextInt();
         scanner.nextLine(); 
@@ -39,7 +40,11 @@ class Main {
               System.out.println(current.ToString());
             }
             break;
-          default:
+          
+          case 3:
+            System.exit(0);
+            break;
+            default:
             System.out.println("Niepoprawny wybór.");
             continue;
         }
