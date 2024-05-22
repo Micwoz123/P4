@@ -1,16 +1,9 @@
-/*
-Kod bazowy programu Commit4_0: 
-• Program dodaje do prostej bazy danych (pliku db.txt) dane odnośnie Studentów.
-• Studenci dodawani są w klasie Main.
-• Wszyscy studenci są wypisywani na końcu klasy Main.
-• Klasa Service obsługuje odczyt i zapis do pliku bazy danych.
-• Klasa Student reprezentuje pojedynczego studenta (Imię, Wiek).
-*/
 import java.util.Scanner;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 class Main {
   public static void main(String[] args) {
@@ -22,7 +15,8 @@ class Main {
 
         System.out.println("1. Dodaj studenta");
         System.out.println("2. Wypisz wszystkich studentów");
-        System.out.println("3. Wyjdz");
+        System.out.println("3. Wyszukaj studenta po nazwisku");
+        System.out.println("4. Wyjdz");
 
         int choice = scanner.nextInt();
         scanner.nextLine(); 
@@ -35,11 +29,10 @@ class Main {
             System.out.println("Podaj wiek studenta:");
             int age = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("Podaj date urodzenia studenta (dd-mm-yyyy):");
+            System.out.println("Podaj datę urodzenia studenta (dd-mm-yyyy):");
 
             String dataur = scanner.nextLine();
 
-            
             try {
               LocalDate.parse(dataur, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             } catch (DateTimeParseException e) {
@@ -55,8 +48,21 @@ class Main {
               System.out.println(current.ToString());
             }
             break;
-
           case 3:
+            System.out.println("Podaj nazwisko studenta:");
+            String nazwiskos = scanner.nextLine();
+            List<Student> foundStudents = s.findStudentByName(nazwiskos);
+
+            if (foundStudents == null || foundStudents.isEmpty()) {
+              System.out.println("Nie znaleziono studenta o nazwisku: " + nazwiskos);
+            } else {
+              System.out.println("Znaleziono następujących studentów:");
+              for (Student student : foundStudents) {
+                System.out.println(student.ToString());
+              }
+            }
+            break;
+          case 4:
             System.exit(0);
             break;
           default:

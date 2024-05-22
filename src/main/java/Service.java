@@ -5,6 +5,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Service {
 
   public void addStudent(Student student) throws IOException {
@@ -22,7 +25,7 @@ public class Service {
     String line = "";
     while (true) {
       line = reader.readLine();
-      if(line == null)
+      if (line == null)
         break;
       ret.add(Student.Parse(line));
     }
@@ -30,7 +33,17 @@ public class Service {
     return ret;
   }
 
-  public Student findStudentByName(String name) {
-    return null;
+  public List<Student> findStudentByName(String nazwiskos) throws IOException {
+    List<Student> foundStudents = new ArrayList<Student>();
+    try {
+      for (Student student : getStudents()) {
+        if (student != null && student.getNazwisko().equalsIgnoreCase(nazwiskos)) {
+          foundStudents.add(student);
+        }
+      }
+    } catch (IOException e) {
+      System.err.println("Error reading student data: " + e.getMessage());
+    }
+    return foundStudents;
   }
 }
