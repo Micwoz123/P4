@@ -8,19 +8,22 @@ Kod bazowy programu Commit4_0:
 */
 import java.util.Scanner;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 class Main {
   public static void main(String[] args) {
     try {
       Service s = new Service();
       Scanner scanner = new Scanner(System.in);
-      
+
       while (true) {
-        
-        System.out.println("1. Z konsoli");
+
+        System.out.println("1. Dodaj studenta");
         System.out.println("2. Wypisz wszystkich studentów");
         System.out.println("3. Wyjdz");
-        
+
         int choice = scanner.nextInt();
         scanner.nextLine(); 
         switch (choice) {
@@ -32,22 +35,31 @@ class Main {
             System.out.println("Podaj wiek studenta:");
             int age = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("Podaj date urodzenia studenta");
+            System.out.println("Podaj date urodzenia studenta (dd-mm-yyyy):");
+
             String dataur = scanner.nextLine();
-            scanner.nextLine(); 
-            s.addStudent(new Student(name,nazwisko,age,dataur));
+
+            
+            try {
+              LocalDate.parse(dataur, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            } catch (DateTimeParseException e) {
+              System.out.println("Niepoprawny format daty. Użyj formatu dd-mm-yyyy.");
+              continue;
+            }
+
+            s.addStudent(new Student(name, nazwisko, age, dataur));
             break;
-            case 2:
+          case 2:
             var students = s.getStudents();
             for (Student current : students) {
               System.out.println(current.ToString());
             }
             break;
-          
+
           case 3:
             System.exit(0);
             break;
-            default:
+          default:
             System.out.println("Niepoprawny wybór.");
             continue;
         }
@@ -57,7 +69,6 @@ class Main {
           break;
         }
       }
-      
 
       var students = s.getStudents();
       for(Student current : students) {
